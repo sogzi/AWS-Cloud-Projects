@@ -41,8 +41,6 @@ A beginner-friendly, step-by-step guide. You will build two small websites (**Re
 
 ## 2. The architecture
 
-![Architecture diagram](architecture-public.svg)
-
 <img width="1360" height="1380" alt="image" src="https://github.com/user-attachments/assets/b24b6114-a501-41d5-ac03-2372093b419a" />
 
 
