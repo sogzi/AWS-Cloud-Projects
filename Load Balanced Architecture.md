@@ -10,6 +10,9 @@ Browser ──> ALB ──rules──┤  Red EC2 (Red target group)            
                          │  Blue EC2 (Blue target group)                  │
                          └────────────────────────────────────────────────┘
 ```
+<img width="2720" height="2760" alt="alb_path_host_routing_architecture" src="https://github.com/user-attachments/assets/6d122652-1713-45d3-8efa-6e8ccde3de8b" />
+
+
 
 ## Contents
 
