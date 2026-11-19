@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="690" viewBox="0 0 680 690" role="img">
+<title>Architecture A: ALB with path and host routing to Red and Blue EC2 instances in public subnets</title>
+<desc>A browser resolves red and blue subdomains through Route 53 to an internet-facing Application Load Balancer in the default VPC. Listener rules forward to Red and Blue target groups, which point to EC2 instances in two availability zones. Both instances read site files from S3 through an IAM role.</desc>
+<style>
+text{font-family:Arial,Helvetica,sans-serif}
+.th{font-size:14px;font-weight:bold}
+.ts{font-size:12px}
+.lbl{font-size:12px;fill:#5F5E5A}
+.dash{fill:none;stroke:#888780;stroke-width:1;stroke-dasharray:6 4}
+.arr{fill:none;stroke:#5F5E5A;stroke-width:1.5}
+.ic *{fill:none;stroke:#2C2C2A;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.gray rect{fill:#F1EFE8;stroke:#5F5E5A;stroke-width:.8}
+.gray .th{fill:#444441}.gray .ts{fill:#5F5E5A}
+.purple rect{fill:#EEEDFE;stroke:#534AB7;stroke-width:.8}
+.purple .th{fill:#3C3489}.purple .ts{fill:#534AB7}
+.coral rect{fill:#FAECE7;stroke:#993C1D;stroke-width:.8}
+.coral .th{fill:#712B13}.coral .ts{fill:#993C1D}
+.blue rect{fill:#E6F1FB;stroke:#185FA5;stroke-width:.8}
+.blue .th{fill:#0C447C}.blue .ts{fill:#185FA5}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="680" height="690" fill="#FFFFFF"/>
+
+<rect class="dash" x="40" y="130" width="600" height="445" rx="12"/>
+<text class="lbl" x="56" y="150">Default VPC · us-east-1</text>
+<text class="lbl" x="624" y="150" text-anchor="end">WebsiteSG: HTTP 80</text>
+
+<rect class="dash" x="90" y="425" width="240" height="120" rx="8"/>
+<text class="lbl" x="102" y="441">Public subnet · us-east-1a</text>
+<rect class="dash" x="350" y="425" width="240" height="120" rx="8"/>
+<text class="lbl" x="362" y="441">Public subnet · us-east-1b</text>
+
+<g class="gray">
+<rect x="40" y="40" width="170" height="56" rx="8"/>
+<text class="th" x="88" y="59" dominant-baseline="central">Browser</text>
+<text class="ts" x="88" y="78" dominant-baseline="central">User traffic</text>
+</g>
+<g class="ic"><rect x="52" y="57" width="24" height="18" rx="2"/><line x1="52" y1="63" x2="76" y2="63"/></g>
+
+<g class="purple">
+<rect x="255" y="40" width="170" height="56" rx="8"/>
+<text class="th" x="303" y="59" dominant-baseline="central">Route 53</text>
+<text class="ts" x="303" y="78" dominant-baseline="central">Alias A records</text>
+</g>
+<g class="ic"><circle cx="276" cy="68" r="11"/><ellipse cx="276" cy="68" rx="5" ry="11"/><line x1="265" y1="68" x2="287" y2="68"/></g>
+
+<g class="purple">
+<rect x="200" y="170" width="280" height="56" rx="8"/>
+<text class="th" x="248" y="189" dominant-baseline="central">Application Load Balancer</text>
+<text class="ts" x="248" y="208" dominant-baseline="central">Internet-facing, HTTP:80</text>
+</g>
+<g class="ic"><circle cx="214" cy="198" r="3"/><line x1="217" y1="198" x2="234" y2="188"/><line x1="217" y1="198" x2="234" y2="208"/><circle cx="237" cy="188" r="3"/><circle cx="237" cy="208" r="3"/></g>
+
+<g class="purple">
+<rect x="105" y="260" width="210" height="56" rx="8"/>
+<text class="th" x="210" y="279" text-anchor="middle" dominant-baseline="central">Rule 1</text>
+<text class="ts" x="210" y="298" text-anchor="middle" dominant-baseline="central">/red* or red.domain</text>
+</g>
+<g class="purple">
+<rect x="365" y="260" width="210" height="56" rx="8"/>
+<text class="th" x="470" y="279" text-anchor="middle" dominant-baseline="central">Rule 2</text>
+<text class="ts" x="470" y="298" text-anchor="middle" dominant-baseline="central">/blue* or blue.domain</text>
+</g>
+
+<g class="coral">
+<rect x="105" y="350" width="210" height="56" rx="8"/>
+<text class="th" x="210" y="369" text-anchor="middle" dominant-baseline="central">Red target group</text>
+<text class="ts" x="210" y="388" text-anchor="middle" dominant-baseline="central">Health: /red/index.html</text>
+</g>
+<g class="blue">
+<rect x="365" y="350" width="210" height="56" rx="8"/>
+<text class="th" x="470" y="369" text-anchor="middle" dominant-baseline="central">Blue target group</text>
+<text class="ts" x="470" y="388" text-anchor="middle" dominant-baseline="central">Health: /blue/index.html</text>
+</g>
+
+<g class="coral">
+<rect x="105" y="455" width="210" height="56" rx="8"/>
+<text class="th" x="153" y="474" dominant-baseline="central">Red EC2 instance</text>
+<text class="ts" x="153" y="493" dominant-baseline="central">Apache · public IP</text>
+</g>
+<g class="ic"><rect x="117" y="471" width="24" height="24" rx="3"/><rect x="123" y="477" width="12" height="12"/></g>
+<g class="blue">
+<rect x="365" y="455" width="210" height="56" rx="8"/>
+<text class="th" x="413" y="474" dominant-baseline="central">Blue EC2 instance</text>
+<text class="ts" x="413" y="493" dominant-baseline="central">Apache · public IP</text>
+</g>
+<g class="ic"><rect x="377" y="471" width="24" height="24" rx="3"/><rect x="383" y="477" width="12" height="12"/></g>
+
+<g class="gray">
+<rect x="220" y="600" width="240" height="56" rx="8"/>
+<text class="th" x="268" y="619" dominant-baseline="central">S3 bucket</text>
+<text class="ts" x="268" y="638" dominant-baseline="central">Site files via IAM role</text>
+</g>
+<g class="ic"><ellipse cx="244" cy="618" rx="12" ry="4"/><path d="M232 618L236 642L252 642L256 618"/></g>
+
+<line class="arr" x1="210" y1="68" x2="253" y2="68" marker-end="url(#arrow)"/>
+<line class="arr" x1="340" y1="98" x2="340" y2="168" marker-end="url(#arrow)"/>
+<line class="arr" x1="270" y1="228" x2="214" y2="258" marker-end="url(#arrow)"/>
+<line class="arr" x1="410" y1="228" x2="466" y2="258" marker-end="url(#arrow)"/>
+<line class="arr" x1="210" y1="318" x2="210" y2="348" marker-end="url(#arrow)"/>
+<line class="arr" x1="470" y1="318" x2="470" y2="348" marker-end="url(#arrow)"/>
+<line class="arr" x1="210" y1="408" x2="210" y2="453" marker-end="url(#arrow)"/>
+<line class="arr" x1="470" y1="408" x2="470" y2="453" marker-end="url(#arrow)"/>
+<line class="arr" x1="290" y1="598" x2="215" y2="513" marker-end="url(#arrow)"/>
+<line class="arr" x1="390" y1="598" x2="465" y2="513" marker-end="url(#arrow)"/>
+</svg>
